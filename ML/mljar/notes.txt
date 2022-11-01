@@ -1,0 +1,6 @@
+#Build
+sudo docker build --network=host -t gpu_mljar .
+sudo docker tag gpu_autogluon bsaldivar/gpu_mljar:0.11.3
+
+#Run
+sudo  docker run -it -v "$(pwd)":/tf/mnt/ --rm --gpus all -p 9999:8888 gpu_mljar
