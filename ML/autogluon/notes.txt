@@ -1,0 +1,23 @@
+#Build image
+sudo docker build --network=host -t gpu_autogluon .
+sudo docker tag gpu_autogluon bsaldivar/gpu_autogluon:0.5.2
+sudo docker push bsaldivar/gpu_autogluon:0.5.2
+
+#Get the image:
+sudo docker pull bsaldivar/gpu_autogluon:0.5.2
+
+#Run image
+sudo docker run -it --rm --gpus all -v /home/bsaldivar/ml/bbv/datasets/joined_data/:/tf/mnt/ bsaldivar/gpu_autogluon:0.5.2 /bin/bash
+sudo docker run -it --rm --gpus all -p 9999:8888 gpu_autogluon /bin/bash
+sudo  docker run -it --rm --gpus all -p 9999:8888 gpu_autogluon
+sudo  docker run -it -v /home/bsaldivar/ml/bbv/datasets/joined_data/:/tf/mnt/ --rm --gpus all -p 9999:8888 gpu_autogluon
+
+docker push gpu_autogluon:0.5.2
+
+/home/bsaldivar/ml/bbv/datasets/joined_data
+
+1643  docker run -it --rm --gpus all -p 9999:8888 gpu_tabpfn
+1647  docker run -it --rm --gpus all -p 9999:8888 gpu_tabpfn
+1650  docker run -it --rm --gpus all -p 9999:8888 gpu_tabpfn
+1658  docker run -it --rm --gpus all -p 9999:8888 gpu_tabpfn
+1659  docker run -it -v /home/bsaldivar/ml/bbv/datasets/joined_data/:/app/mnt/ --rm --gpus all -p 9999:8888 gpu_tabpfn
