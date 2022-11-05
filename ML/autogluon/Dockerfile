@@ -6,9 +6,9 @@ RUN pip3 install torch==1.12.0+cu113 torchvision==0.13.0+cu113 torchtext==0.13.0
 RUN pip3 install autogluon
 RUN pip3 install bokeh==2.0.1
 #try these:
-RUN apt install cmake -y
-RUN pip uninstall lightgbm -y
-RUN pip install lightgbm --install-option=--gpu
+#RUN apt install cmake -y
+#RUN pip uninstall lightgbm -y
+#RUN pip install lightgbm --install-option=--gpu
 
 #mount file to share files
 RUN mkdir -p /tf/mnt/
