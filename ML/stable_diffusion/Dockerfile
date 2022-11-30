@@ -24,7 +24,7 @@ RUN apt-get install nano -y
 
 #stable_diffusion
 RUN git clone https://github.com/Stability-AI/stablediffusion
-RUN cd stablediffusion && pip install -r requirements.txt
+RUN cd stablediffusion && pip install -r requirements.txt && pip install -e .
 
 #download weights
 RUN apt-get install wget
@@ -40,3 +40,5 @@ RUN apt-get -y install cmake protobuf-compiler
 RUN pip install dlib
 RUN pip install ai_tools
 COPY microsoft_demo.py /usr/local/lib/python3.8/dist-packages/ai_tools/microsoft_demo.py
+RUN pip install cognitive_face
+RUN pip install zprint
