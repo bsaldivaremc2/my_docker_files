@@ -26,21 +26,25 @@ RUN conda install -n ldm pytorch==1.12.1 torchvision==0.13.1 -c pytorch
 #RUN conda activate ldm
 #SHELL ["conda","activate","ldm"]
 SHELL ["conda","run","-n","ldm","/bin/bash","-c"]
-RUN echo $CONDA_DEFAULT_ENV > tmp.txt #check if activate environment works
+RUN echo "conda env for transformers: $CONDA_DEFAULT_ENV" > tmp.txt
 RUN pip install transformers==4.19.2 diffusers invisible-watermark
 RUN cd stable-diffusion && pip install -e .
-
+RUN echo "conda env for stable diffusion: $CONDA_DEFAULT_ENV" >> tmp.txt
 #
 RUN git clone https://github.com/facebookresearch/xformers.git
 RUN cd xformers && \
  git submodule update --init --recursive && \
  pip install -r requirements.txt && \
  pip install -e .
+RUN echo "conda env for stable xformers: $CONDA_DEFAULT_ENV" >> tmp.txt
 
 RUN mkdir weights
 RUN cd weights && wget https://huggingface.co/stabilityai/stable-diffusion-2/blob/main/768-v-ema.ckpt
 
 #errors:
+RUN echo "conda env before errors: $CONDA_DEFAULT_ENV" >> tmp.txt
 RUN apt-get update
 RUN apt-get install ffmpeg libsm6 libxext6  -y
 RUN apt-get install nano -y
+RUN echo "conda env after ImportError: libSM.so.6: cannot open shared object file: No such file or directory
+: $CONDA_DEFAULT_ENV" >> tmp.txt 
