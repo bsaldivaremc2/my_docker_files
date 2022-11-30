@@ -19,4 +19,5 @@ ENV PATH=$CONDA_DIR/bin:$PATH
 
 RUN git clone https://github.com/CompVis/stable-diffusion
 RUN cd stable-diffusion && conda env create -f environment.yaml
+RUN conda init bash
 RUN conda activate ldm
