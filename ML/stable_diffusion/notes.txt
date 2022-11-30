@@ -2,6 +2,7 @@
 sudo docker build --network=host -t stable_diffusion .
 #RUN
 sudo  docker run -it -v "$(pwd)":/tf/mnt/ --rm --gpus all stable_diffusion /bin/bash
+#run stablediffusion
 python scripts/txt2img.py \
 --prompt "a professional photograph of an astronaut riding a horse" \
 --ckpt /tf/weights/768model.ckpt \
