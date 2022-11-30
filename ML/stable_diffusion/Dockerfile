@@ -26,7 +26,7 @@ RUN conda install -n ldm pytorch==1.12.1 torchvision==0.13.1 -c pytorch
 #RUN conda activate ldm
 #SHELL ["conda","activate","ldm"]
 SHELL ["conda","run","-n","ldm","/bin/bash","-c"]
-RUN echo $CONDA_DEFAULT_ENV > tmp.txt
+RUN echo $CONDA_DEFAULT_ENV > tmp.txt #check if activate environment works
 RUN pip install transformers==4.19.2 diffusers invisible-watermark
 RUN cd stable-diffusion && pip install -e .
 
@@ -36,3 +36,7 @@ RUN cd xformers && \
  git submodule update --init --recursive && \
  pip install -r requirements.txt && \
  pip install -e .
+
+ RUN mkdir weights
+ RUN cd weights && wget https://huggingface.co/stabilityai/stable-diffusion-2/blob/main/768-v-ema.ckpt
+ 
