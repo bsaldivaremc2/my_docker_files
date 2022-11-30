@@ -1,5 +1,6 @@
 #First build a previous anaconda image
-sudo docker build --network=host -t stable_diffusion_conda_req -f conda_req/Dockerfile.
+cd conda_req
+sudo docker build --network=host -t stable_diffusion_conda_req .
 
 #Build
 sudo docker build --network=host -t stable_diffusion .
