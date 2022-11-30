@@ -20,9 +20,9 @@ ENV PATH=$CONDA_DIR/bin:$PATH
 RUN git clone https://github.com/CompVis/stable-diffusion
 RUN cd stable-diffusion && conda env create -f environment.yaml
 RUN conda init bash
+RUN conda install -n ldm pytorch==1.12.1 torchvision==0.13.1 -c pytorch
 #RUN conda activate ldm
 SHELL ["conda","activate","ldm"]
-RUN conda install pytorch==1.12.1 torchvision==0.13.1 -c pytorch
 RUN pip install transformers==4.19.2 diffusers invisible-watermark
 RUN pip install -e .
 #
