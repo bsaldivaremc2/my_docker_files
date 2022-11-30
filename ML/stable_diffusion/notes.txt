@@ -1,5 +1,13 @@
 #Build
 sudo docker build --network=host -t stable_diffusion .
+#RUN
+sudo  docker run -it -v "$(pwd)":/tf/mnt/ --rm --gpus all stable_diffusion /bin/bash
+python scripts/txt2img.py \
+--prompt "a professional photograph of an astronaut riding a horse" \
+--ckpt /tf/weights/768model.ckpt \
+--config configs/stable-diffusion/v2-inference-v.yaml \
+--H 768 --W 768
+
 
 
 sudo docker tag gpu_mljar bsaldivar/gpu_mljar:0.11.3

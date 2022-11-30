@@ -17,6 +17,15 @@ RUN cd xformers && git submodule update --init --recursive && pip install -r req
 #mount file to share files
 RUN mkdir -p /tf/mnt/
 
+#cv2 requirements
+RUN apt-get update
+RUN apt-get install ffmpeg libsm6 libxext6  -y
+
 #stable_diffusion
 RUN git clone https://github.com/Stability-AI/stablediffusion
 RUN cd stablediffusion && pip install -r requirements.txt
+
+#download weights
+RUN apt-get install wget
+RUN mkdir weights
+RUN cd weights && wget https://huggingface.co/stabilityai/stable-diffusion-2/blob/main/768-v-ema.ckpt
