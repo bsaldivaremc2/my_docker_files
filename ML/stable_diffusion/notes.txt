@@ -1,5 +1,7 @@
 #Build
-sudo docker build --network=host -t gpu_mljar .
+sudo docker build --network=host -t stable_diffusion .
+
+
 sudo docker tag gpu_mljar bsaldivar/gpu_mljar:0.11.3
 #push
 sudo docker push bsaldivar/gpu_mljar:0.11.3
