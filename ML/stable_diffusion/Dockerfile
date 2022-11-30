@@ -2,7 +2,7 @@ FROM tensorflow/tensorflow:latest-gpu-jupyter
 RUN apt-get install git
 
 RUN pip install torch==1.12.1
-RUN pip instal torchvision==0.13.1
+RUN pip install torchvision==0.13.1
 RUN pip install transformers==4.19.2
 RUN pip install diffusers
 RUN pip install invisible-watermark
