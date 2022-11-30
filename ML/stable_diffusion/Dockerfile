@@ -37,6 +37,10 @@ RUN cd xformers && \
  pip install -r requirements.txt && \
  pip install -e .
 
- RUN mkdir weights
- RUN cd weights && wget https://huggingface.co/stabilityai/stable-diffusion-2/blob/main/768-v-ema.ckpt
- 
+RUN mkdir weights
+RUN cd weights && wget https://huggingface.co/stabilityai/stable-diffusion-2/blob/main/768-v-ema.ckpt
+
+#errors:
+RUN apt-get update
+RUN apt-get install ffmpeg libsm6 libxext6  -y
+RUN apt-get install nano -y
