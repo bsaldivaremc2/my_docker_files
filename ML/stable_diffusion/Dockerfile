@@ -13,8 +13,8 @@ RUN pip install invisible-watermark
 
 #xformers
 RUN git clone https://github.com/facebookresearch/xformers.git
-RUN cd xformers
-RUN git submodule update --init --recursive
+RUN cd xformers && git submodule update --init --recursive
+#RUN git submodule update --init --recursive
 RUN pip install -r requirements.txt
 RUN pip install -e .
 
