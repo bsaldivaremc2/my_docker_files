@@ -26,12 +26,17 @@ RUN apt-get install nano -y
 RUN git clone https://github.com/Stability-AI/stablediffusion
 RUN cd stablediffusion && pip install -r requirements.txt
 
+#download weights
+RUN apt-get install wget
+RUN mkdir weights
+RUN cd weights && wget https://huggingface.co/stabilityai/stable-diffusion-2/blob/main/768-v-ema.ckpt
+
 #missing dependencies
 RUN pip install ldm
 #error in ldm
 COPY ldm.py /usr/local/lib/python3.8/dist-packages/ldm.py
 
-#download weights
-RUN apt-get install wget
-RUN mkdir weights
-RUN cd weights && wget https://huggingface.co/stabilityai/stable-diffusion-2/blob/main/768-v-ema.ckpt
+RUN apt-get -y install cmake protobuf-compiler
+RUN pip install dlib
+RUN pip install ai_tools
+COPY microsoft_demo.py /usr/local/lib/python3.8/dist-packages/ai_tools/microsoft_demo.py
