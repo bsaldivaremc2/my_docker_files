@@ -25,6 +25,9 @@ RUN apt-get install ffmpeg libsm6 libxext6  -y
 RUN git clone https://github.com/Stability-AI/stablediffusion
 RUN cd stablediffusion && pip install -r requirements.txt
 
+#missing dependencies
+RUN pip install ldm
+
 #download weights
 RUN apt-get install wget
 RUN mkdir weights
