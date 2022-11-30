@@ -28,7 +28,7 @@ RUN conda install -n ldm pytorch==1.12.1 torchvision==0.13.1 -c pytorch
 SHELL ["conda","run","-n","ldm","/bin/bash","-c"]
 RUN echo $CONDA_DEFAULT_ENV > tmp.txt
 RUN pip install transformers==4.19.2 diffusers invisible-watermark
-RUN cd stable-diffusion pip install -e .
+RUN cd stable-diffusion && pip install -e .
 
 #
 RUN git clone https://github.com/facebookresearch/xformers.git
