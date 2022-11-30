@@ -4,7 +4,7 @@ RUN apt-get install git
 #Conda instructions from https://fabiorosado.dev/blog/install-conda-in-docker/
 # Install base utilities
 RUN apt-get update && \
-    apt-get install -y build-essentials  && \
+    apt-get install -y build-essential  && \
     apt-get install -y wget && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
