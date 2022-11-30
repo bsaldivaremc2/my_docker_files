@@ -26,4 +26,4 @@ RUN conda install -n ldm pytorch==1.12.1 torchvision==0.13.1 -c pytorch
 #SHELL ["conda","activate","ldm"]
 SHELL ["conda","run","-n","ldm","/bin/bash","-c"]
 RUN pip install transformers==4.19.2 diffusers invisible-watermark
-RUN pip install -e .
+RUN cd stable-diffusion pip install -e .
