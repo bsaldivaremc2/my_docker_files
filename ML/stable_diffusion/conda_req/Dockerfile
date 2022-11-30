@@ -21,3 +21,7 @@ RUN git clone https://github.com/CompVis/stable-diffusion
 RUN cd stable-diffusion && conda env create -f environment.yaml
 RUN conda install -n ldm pytorch==1.12.1 torchvision==0.13.1 -c pytorch
 RUN conda init bash
+RUN source ~/.bashrc
+RUN conda activate ldm
+#SHELL ["conda","activate","ldm"]
+#SHELL ["conda","run","-n","ldm","/bin/bash","-c"]
