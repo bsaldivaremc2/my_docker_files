@@ -34,7 +34,8 @@ RUN echo "$CONDA_DEFAULT_ENV : starting stable diffusion v2." >> tmp.txt
 RUN conda install -n ldm pytorch==1.12.1 torchvision==0.13.1 -c pytorch
 #SHELL ["conda","run","-n","ldm","/bin/bash","-c"] #already activated
 RUN pip install transformers==4.19.2 diffusers invisible-watermark
-RUN cd stablediffusion && pip install -r requirements.txt && pip install -e .
+#RUN cd stablediffusion && pip install -r requirements.txt && pip install -e .
+RUN cd stablediffusion && pip install -e .
 RUN echo "$CONDA_DEFAULT_ENV : finishing stable diffusion v2." >> tmp.txt
 #
 RUN echo "$CONDA_DEFAULT_ENV : starting xformers." >> tmp.txt
