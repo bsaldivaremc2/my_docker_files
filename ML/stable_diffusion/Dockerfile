@@ -18,32 +18,49 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86
 # Put conda in path so we can use conda activate
 ENV PATH=$CONDA_DIR/bin:$PATH
 
+#Version 1
 RUN git clone https://github.com/CompVis/stable-diffusion
 RUN cd stable-diffusion && conda env create -f environment.yaml
-RUN conda install -n ldm pytorch==1.12.1 torchvision==0.13.1 -c pytorch
-#RUN conda init bash
-#RUN source ~/.bashrc
-#RUN conda activate ldm
-#SHELL ["conda","activate","ldm"]
+RUN conda install -n ldm pytorch torchvision -c pytorch
 SHELL ["conda","run","-n","ldm","/bin/bash","-c"]
-RUN echo "conda env for transformers: $CONDA_DEFAULT_ENV" > tmp.txt
+RUN echo "$CONDA_DEFAULT_ENV : starting stable diffusion v1." > tmp.txt
 RUN pip install transformers==4.19.2 diffusers invisible-watermark
 RUN cd stable-diffusion && pip install -e .
-RUN echo "conda env for stable diffusion: $CONDA_DEFAULT_ENV" >> tmp.txt
+RUN echo "$CONDA_DEFAULT_ENV : finishing stable diffusion v1." >> tmp.txt
+
+#Version 2
+RUN git clone https://github.com/Stability-AI/stablediffusion
+RUN echo "$CONDA_DEFAULT_ENV : starting stable diffusion v2." >> tmp.txt
+RUN conda install -n ldm pytorch==1.12.1 torchvision==0.13.1 -c pytorch
+#SHELL ["conda","run","-n","ldm","/bin/bash","-c"] #already activated
+RUN pip install transformers==4.19.2 diffusers invisible-watermark
+RUN cd stablediffusion && pip install -e .
+RUN echo "$CONDA_DEFAULT_ENV : finishing stable diffusion v2." >> tmp.txt
 #
+RUN echo "$CONDA_DEFAULT_ENV : starting xformers." >> tmp.txt
 RUN git clone https://github.com/facebookresearch/xformers.git
 RUN cd xformers && \
  git submodule update --init --recursive && \
  pip install -r requirements.txt && \
  pip install -e .
-RUN echo "conda env for stable xformers: $CONDA_DEFAULT_ENV" >> tmp.txt
+RUN echo "$CONDA_DEFAULT_ENV : finishing xformers." >> tmp.txt
 
 RUN mkdir weights
 RUN cd weights && wget https://huggingface.co/stabilityai/stable-diffusion-2/blob/main/768-v-ema.ckpt
 
 #errors:
-RUN echo "conda env before errors: $CONDA_DEFAULT_ENV" >> tmp.txt
+RUN echo "$CONDA_DEFAULT_ENV : starting error correction." >> tmp.txt
 RUN apt-get update
 RUN apt-get install ffmpeg libsm6 libxext6  -y
 RUN apt-get install nano -y
-RUN echo "conda env after ImportError: libSM.so.6: cannot open shared object file: No such file or directory : $CONDA_DEFAULT_ENV" >> tmp.txt 
+RUN apt-get get install apt-utils  -y
+RUN echo "$CONDA_DEFAULT_ENV : fixed for conda env after ImportError: libSM.so.6: cannot open shared object file: No such file or directory." >> tmp.txt
+RUN conda init bash
+RUN source ~/.bashrc
+RUN conda activate ldm
+
+
+#RUN conda init bash
+#RUN source ~/.bashrc
+#RUN conda activate ldm
+#SHELL ["conda","activate","ldm"]
