@@ -53,7 +53,7 @@ RUN echo "$CONDA_DEFAULT_ENV : starting error correction." >> tmp.txt
 RUN apt-get update
 RUN apt-get install ffmpeg libsm6 libxext6  -y
 RUN apt-get install nano -y
-RUN apt-get get install apt-utils  -y
+RUN apt-get install apt-utils  -y
 RUN echo "$CONDA_DEFAULT_ENV : fixed for conda env after ImportError: libSM.so.6: cannot open shared object file: No such file or directory." >> tmp.txt
 RUN conda init bash
 RUN source ~/.bashrc
