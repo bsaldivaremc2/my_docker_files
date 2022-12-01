@@ -45,10 +45,11 @@ RUN echo "$CONDA_DEFAULT_ENV : finishing stable diffusion v2." >> tmp.txt
 #RUN conda install -c conda-forge gxx_linux-64=9.5.0
 
 #xformers
+SHELL ["conda","run","-n","ldm","/bin/bash","-c"]
 RUN git clone https://github.com/facebookresearch/xformers.git
-RUN cd xformers && git submodule update --init --recursive && \
- pip install -r requirements.txt && \
- pip install -e .
+RUN cd xformers && git submodule update --init --recursive
+RUN cd xformers && pip install -r requirements.txt
+RUN cd xformers && pip install -e .
 
 #errors:
 RUN echo "$CONDA_DEFAULT_ENV : starting error correction." >> tmp.txt
@@ -56,7 +57,10 @@ RUN apt-get update
 RUN apt-get install ffmpeg libsm6 libxext6  -y
 RUN apt-get install nano -y
 RUN apt-get install apt-utils  -y
+
+SHELL ["conda","run","-n","ldm","/bin/bash","-c"]
 RUN pip install open_clip_torch # missing
+
 RUN echo "$CONDA_DEFAULT_ENV : fixed for conda env after ImportError: libSM.so.6: cannot open shared object file: No such file or directory." >> tmp.txt
 #Error in repo:
 RUN cp -r stablediffusion/ldm/ stablediffusion/scripts/
